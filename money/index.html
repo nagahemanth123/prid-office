@@ -199,6 +199,7 @@ td b{font-weight:600}
 .seg button span{color:var(--mute);font-weight:400;margin-left:4px}
 .seg button[aria-pressed="true"]{background:var(--side);color:#fff}
 .seg button[aria-pressed="true"] span{color:var(--side-mute)}
+.seg button .nw,.seg button[aria-pressed="true"] .nw{color:inherit;margin-left:0}
 .sites .select{margin-left:auto}
 .period{display:flex;gap:6px 16px;flex-wrap:wrap;align-items:baseline;margin-top:2px;color:var(--ink-2)}
 .period b{font-weight:600;color:var(--ink)}
@@ -428,7 +429,7 @@ html.locked,html.locked body{overflow:hidden}
 }
 @media (max-width:820px){
   .seg{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .seg button{white-space:normal;line-height:1.2;padding:0 8px;min-height:48px;height:auto}
+  .seg button{white-space:normal;line-height:1.2;padding:4px 8px;min-height:48px;height:auto;text-wrap:balance}
   .stk td.c-date.num{white-space:normal;text-align:left}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
@@ -509,62 +510,62 @@ var MKN={P:'Present',H:'Half day',A:'Absent'},MKV={P:1,H:.5,A:0},MKNEXT={P:'H',H
 
 /* ---------- data ---------- */
 var VEN=[
- {id:'pranava',name:'Pranava Enclave'},{id:'ekam',name:'Ekam Residences'},{id:'mythri',name:'Mythri'},
- {id:'nilayam',name:'Sri Nilayam'},{id:'meadows',name:'Green Meadows'},{id:'brundavan',name:'Sai Brundavan'}
+ {id:'pranava',name:'Pranava Enclave'},{id:'mythri',name:'Mythri Enclave'},{id:'panchamukhi',name:'Panchamukhi Paradise – 2'},
+ {id:'vivanta',name:'Vivanta Enclave – 2'},{id:'vajra',name:'Vajra Living'},{id:'ekam',name:'Ekam Residences'}
 ];
 var VN={office:'Office',sites:'4 sites',shared:'All sites'};VEN.forEach(function(v){VN[v.id]=v.name});
 var CATS=['mat','lab','veh','off','sal'];
 var CN={mat:'Materials and suppliers',lab:'Labour',veh:'Fuel and vehicles',off:'Office and marketing',sal:'Salaries'};
 var CS={mat:'Materials',lab:'Labour',veh:'Fuel and vehicles',off:'Office and marketing',sal:'Salaries'};
 /* money in, 1 to 15 Nov, by venture */
-var IN={pranava:2140000,ekam:1780000,mythri:1420000,nilayam:960000,meadows:1290000,brundavan:860000};
+var IN={pranava:1100000,mythri:1750000,panchamukhi:2600000,vivanta:1250000,vajra:400000,ekam:1350000};
 /* money out paid, 1 to 15 Nov, by venture and category (office costs split across ventures) */
 var BASE={
  pranava:{mat:120000,lab:0,veh:0,off:160000,sal:70000},
- ekam:{mat:520000,lab:300000,veh:150000,off:95000,sal:75000},
  mythri:{mat:560000,lab:390000,veh:190000,off:70000,sal:70000},
- nilayam:{mat:90000,lab:0,veh:0,off:85000,sal:55000},
- meadows:{mat:690000,lab:626000,veh:245000,off:75000,sal:80000},
- brundavan:{mat:280000,lab:104000,veh:100000,off:60000,sal:60000}
+ panchamukhi:{mat:720000,lab:626000,veh:245000,off:100000,sal:95000},
+ vivanta:{mat:280000,lab:104000,veh:100000,off:60000,sal:60000},
+ vajra:{mat:60000,lab:0,veh:0,off:60000,sal:40000},
+ ekam:{mat:520000,lab:300000,veh:150000,off:95000,sal:75000}
 };
 var BASEOUT={};VEN.forEach(function(v){BASEOUT[v.id]=CATS.reduce(function(a,c){return a+BASE[v.id][c]},0)});
 var CASH=[['Cash in office',385000],['SBI current account',4120000],['HDFC current account',1865000]];
 var SER=[['Jun',61.2,48.5],['Jul',72.8,55.2],['Aug',58.4,51.9],['Sep',79.1,60.3],['Oct',91.6,66.8],['Nov',84.5,53.2]];
-var BUNKV={mythri:45000,meadows:60000,ekam:35000,brundavan:25000};
+var BUNKV={mythri:45000,panchamukhi:60000,ekam:35000,vivanta:25000};
 
 var rows=[
  {id:'p1',d:15,to:'Sri Lakshmi Cements',what:'Bill 2231, 400 bags OPC 53 grade',cat:'mat',v:'mythri',amt:340000,mode:'Bank transfer',st:'wait',appr:1,bill:'b1',by:'Sravani'},
  {id:'p2',d:14,to:'K. Rangaiah, contractor',what:'Compound wall, part bill 3',cat:'lab',v:'mythri',amt:180000,mode:'Bank transfer',st:'wait',appr:1,wo:'w1',by:'Ravindra'},
- {id:'p3',d:14,to:'Sri Sai Hydraulics, Kadapa',what:'JCB hydraulic repair, AP 04 TX 6617',cat:'veh',v:'meadows',amt:62000,mode:'Bank transfer',st:'wait',appr:1,by:'Harsha'},
+ {id:'p3',d:14,to:'Sri Sai Hydraulics, Kadapa',what:'JCB hydraulic repair, AP 04 TX 6617',cat:'veh',v:'panchamukhi',amt:62000,mode:'Bank transfer',st:'wait',appr:1,by:'Harsha'},
  {id:'p4',d:14,to:'Wage sheet, 126 workers',what:'Week 2 to 7 Nov, paid at the sites',cat:'lab',v:'sites',amt:496000,mode:'Cash',st:'paid',inBase:1},
- {id:'p5',d:13,to:'Venkata Sai Steels',what:'Bill VS-884, TMT bars 12 mm',cat:'mat',v:'meadows',amt:150000,mode:'',st:'due',bill:'b2'},
+ {id:'p5',d:13,to:'Venkata Sai Steels',what:'Bill VS-884, TMT bars 12 mm',cat:'mat',v:'panchamukhi',amt:150000,mode:'',st:'due',bill:'b2'},
  {id:'p6',d:12,to:'Eenadu, Kadapa edition',what:'Ekam Residences advert, 8 Nov',cat:'off',v:'ekam',amt:38000,mode:'Bank transfer',st:'paid',inBase:1},
- {id:'p7',d:11,to:'S. Peddanna, contractor',what:'Internal roads gravel, bill 4',cat:'lab',v:'meadows',amt:230000,mode:'Bank transfer',st:'paid',inBase:1},
+ {id:'p7',d:11,to:'S. Peddanna, contractor',what:'Internal roads gravel, bill 4',cat:'lab',v:'panchamukhi',amt:230000,mode:'Bank transfer',st:'paid',inBase:1},
  {id:'p8',d:10,to:'Sri Venkateswara Fuels',what:'Diesel account, 16 to 31 Oct',cat:'veh',v:'shared',amt:148000,mode:'Bank transfer',st:'paid',inBase:1},
  {id:'p9',d:9,to:'Kadapa Granite Metal & Sand',what:'6 loads of 20 mm metal',cat:'mat',v:'ekam',amt:126000,mode:'Bank transfer',st:'paid',inBase:1},
  {id:'p10',d:8,to:'Raju Motors, Proddatur',what:'Tipper AP 39 TV 4471, gearbox',cat:'veh',v:'mythri',amt:86000,mode:'Bank transfer',st:'paid',inBase:1},
  {id:'p11',d:7,to:'Wage sheet, 122 workers',what:'Week 26 to 31 Oct, paid at the sites',cat:'lab',v:'sites',amt:484000,mode:'Cash',st:'paid',inBase:1},
- {id:'p12',d:7,to:'Raghava Earthmovers',what:'Motor grader hire, 2 days',cat:'veh',v:'meadows',amt:40000,mode:'UPI',st:'paid',inBase:1},
+ {id:'p12',d:7,to:'Raghava Earthmovers',what:'Motor grader hire, 2 days',cat:'veh',v:'panchamukhi',amt:40000,mode:'UPI',st:'paid',inBase:1},
  {id:'p13',d:6,to:'Balaji Pipes and Fittings',what:'Advance for 110 mm drain pipes',cat:'mat',v:'ekam',amt:60000,mode:'Bank transfer',st:'held',appr:1,by:'Nagaraju'},
  {id:'p14',d:5,to:'Office rent',what:'November, Gandhi Road office',cat:'off',v:'office',amt:45000,mode:'Bank transfer',st:'paid',inBase:1},
- {id:'p15',d:3,to:'Sri Balaji Tyres',what:'Tractor AP 04 AB 2290, two rear tyres',cat:'veh',v:'brundavan',amt:59000,mode:'Cheque',st:'paid',inBase:1},
+ {id:'p15',d:3,to:'Sri Balaji Tyres',what:'Tractor AP 04 AB 2290, two rear tyres',cat:'veh',v:'vivanta',amt:59000,mode:'Cheque',st:'paid',inBase:1},
  {id:'p16',d:1,to:'Salaries for October',what:'14 staff, see Labour',cat:'sal',v:'office',amt:410000,mode:'Bank transfer',st:'paid',inBase:1}
 ];
 function R(id){return rows.filter(function(r){return r.id===id})[0]}
 var bills=[
  {id:'b1',sup:'Sri Lakshmi Cements',no:'2231',v:'mythri',amt:340000,due:18,row:'p1'},
- {id:'b2',sup:'Venkata Sai Steels',no:'VS-884',v:'meadows',amt:150000,due:12,row:'p5'},
- {id:'b3',sup:'Kadapa Granite Metal & Sand',no:'517',v:'meadows',amt:95000,due:25},
+ {id:'b2',sup:'Venkata Sai Steels',no:'VS-884',v:'panchamukhi',amt:150000,due:12,row:'p5'},
+ {id:'b3',sup:'Kadapa Granite Metal & Sand',no:'517',v:'panchamukhi',amt:95000,due:25},
  {id:'b4',sup:'Balaji Pipes and Fittings',no:'1092',v:'ekam',amt:82000,due:28},
- {id:'b5',sup:'Sri Rama Bricks',no:'344',v:'brundavan',amt:48000,due:32}
+ {id:'b5',sup:'Sri Rama Bricks',no:'344',v:'vivanta',amt:48000,due:32}
 ];
 function billPaid(b){var r=b.row&&R(b.row);return !!(r&&r.st==='paid')}
 function dueLabel(d){return d>30?(d-30)+' Dec':d+' Nov'}
 
 /* labour */
-var WD={"mythri":[["Y. Mariyamma","Helper",650,"PPPHAP",0],["B. Prasad","Helper",700,"PPPPAP",0],["B. Sunkamma","Helper",600,"PPPPHP",0],["R. Mallaiah","Mason",900,"PHPPAP",0],["A. Chinnamma","Helper",700,"PPHPPP",0],["M. Mariyamma","Helper",700,"PPPPHP",0],["G. Anji","Operator",950,"PPPPPP",0],["E. Kondaiah","Helper",650,"PPPPHP",0],["N. Lakshmaiah","Helper",700,"PPPHHP",0],["A. Siva","Bar bender",800,"HPPPPP",0],["Y. Jilani","Mason",1000,"PPPPPP",0],["S. Hussain","Bar bender",850,"PPPPPP",1000],["B. Narayana","Helper",700,"HPPPPP",0],["V. Kamakshi","Helper",600,"PPPPPP",0],["C. Yerriswamy","Helper",650,"HPPPPP",0],["Y. Balaiah","Helper",700,"PHPPPP",0],["K. Guruvaiah","Helper",650,"PPPPPP",0],["K. Saraswathi","Helper",700,"PPPPPH",0],["P. Peddaiah","Mason",900,"PPPPAP",0],["A. Eswaraiah","Bar bender",850,"PPPPPP",0],["V. Chinna Subbaiah","Helper",650,"PPPPPP",0],["J. Saraswathi","Helper",600,"PPPPPP",0],["Y. Sunkamma","Helper",650,"PPPPPP",0],["J. Suresh","Bar bender",850,"PPPPPP",0],["T. Rangadu","Helper",600,"PPAHPP",0],["P. Khasim","Operator",1000,"PPPPPP",0],["E. Sreenu","Helper",600,"PPPPPP",0],["P. Eswaraiah","Helper",600,"PPPPPP",0],["K. Lakshmamma","Helper",650,"PPPPPP",500],["Y. Obulesu","Mason",1000,"PAPPPP",0],["M. Venkatesu","Helper",600,"PPPPPP",0],["M. Balaiah","Mason",1000,"PPPPHP",0],["P. Mabu Basha","Mason",950,"PPPPPP",0],["B. Pullaiah","Mason",950,"PPAPPP",2000]],"meadows":[["R. Dastagiri","Helper",650,"APPHPP",0],["N. Kamakshi","Helper",650,"PHPAPP",0],["T. Sunkamma","Helper",700,"PPPHPA",0],["D. Gangamma","Helper",650,"PPPHPH",0],["N. Suresh","Mason",1000,"PPPHPP",0],["M. Madhu","Bar bender",850,"APPHPP",0],["D. Eswaraiah","Helper",600,"PHPHPP",0],["G. Venkatamma","Helper",700,"PPPHHP",0],["E. Suresh","Bar bender",850,"PPPHHP",0],["M. Kondaiah","Mason",950,"PPPHPP",1000],["T. Ramudu","Helper",700,"PPPHPP",0],["K. Lakshmaiah","Mason",950,"HAPHPP",0],["G. Venkatesu","Operator",950,"PPPHPP",1500],["R. Maddilety","Helper",700,"APPHPP",0],["M. Narasamma","Helper",600,"PPPHAP",0],["V. Mabu Basha","Operator",950,"PHPHPP",0],["G. Pullamma","Helper",600,"PPPHHP",0],["T. Gangamma","Helper",700,"HPPHPP",500],["R. Subbarayudu","Bar bender",850,"PPPHPH",0],["Y. Eswaraiah","Helper",600,"PPPHPP",0],["S. Siva","Mason",1000,"PPPHAP",0],["N. Gangadhar","Helper",700,"PPPHPP",0],["D. Subbarayudu","Operator",950,"PHPHPP",0],["B. Obulesu","Mason",1000,"PHPHPP",0],["P. Bhaskar","Helper",700,"PPPHPP",0],["A. Venkatesu","Mason",1000,"PPPHPP",0],["T. Mariyamma","Helper",650,"PPPHPP",0],["A. Obulesu","Bar bender",850,"HPPHPP",0],["A. Jayamma","Helper",600,"PPPHPP",0],["N. Obulamma","Helper",600,"PPPHPP",0],["J. Nagendra","Mason",950,"PPPHPP",0],["P. Nagamma","Helper",700,"PHHHPP",0],["M. Maddilety","Helper",650,"PPPHPP",0],["B. Jayamma","Helper",650,"PPPHPP",0],["J. Chinna Subbaiah","Mason",900,"PHPHPP",0],["E. Anji","Helper",650,"PPPHPP",0],["S. Rangadu","Helper",650,"PHPHPP",0],["J. Venkatamma","Helper",700,"PPPAPP",0]],"ekam":[["A. Nagendra","Bar bender",800,"PPPHPP",0],["P. Prasad","Mason",950,"PPPPPP",0],["D. Narasamma","Helper",700,"PPPPPP",0],["D. Narasimhulu","Mason",950,"PPPPPP",1500],["K. Ramanjaneyulu","Mason",950,"PPPPPP",0],["M. Venkatamma","Helper",600,"HPPPPP",0],["M. Subbarayudu","Helper",700,"PPPPPP",0],["E. Narayana","Bar bender",850,"PPAPPH",0],["S. Narasamma","Helper",700,"APPPPP",0],["D. Nagamma","Helper",600,"PPPPPH",0],["D. Suresh","Operator",1000,"HPPPPP",0],["V. Hussain","Helper",650,"PPPPPP",0],["M. Rajeswari","Helper",600,"APPPPP",0],["M. Padma","Helper",700,"PHPPHP",0],["C. Dastagiri","Mason",950,"APPPPP",0],["K. Eswaraiah","Helper",700,"PHPPPP",0],["S. Yellamma","Helper",650,"PPPPPP",0],["C. Lakshmamma","Helper",650,"PPPPPP",0],["P. Eswaramma","Helper",700,"PPPPPP",0],["B. Jilani","Mason",900,"PPPPPH",0],["Y. Kondaiah","Helper",700,"PPPPPA",0],["J. Gangadhar","Bar bender",800,"APPHPP",0],["S. Lakshmamma","Helper",700,"PPPPPP",0],["J. Subbarayudu","Helper",600,"PPPHPP",0],["T. Subbamma","Helper",600,"PPPPPP",0],["J. Mallaiah","Helper",700,"PPPPPP",0],["Y. Ramanjaneyulu","Operator",950,"PPPPAP",0],["E. Lakshmaiah","Mason",900,"HPPPPP",0],["D. Narayana","Bar bender",800,"PPPPPH",0],["C. Ramudu","Helper",700,"PPHPPP",1000],["K. Suresh","Helper",650,"PPPPPP",0],["C. Sreenu","Helper",700,"PPPPPP",0]],"brundavan":[["P. Siva","Helper",650,"PPPPPA",0],["G. Kamakshi","Helper",700,"PPPPPP",0],["E. Obulamma","Helper",600,"PPPAHP",0],["S. Venkatesu","Bar bender",800,"PPPPHP",0],["A. Guruvaiah","Mason",950,"PPPPHP",0],["S. Eswaraiah","Helper",700,"HPPPPP",0],["N. Mallaiah","Helper",700,"HPPPPH",0],["Y. Sreenu","Mason",950,"PPPPHP",1000],["R. Lakshmaiah","Mason",900,"PHPPPP",0],["D. Maddilety","Mason",950,"PPPPPP",0],["C. Mallaiah","Helper",650,"HPPPPP",0],["J. Siva","Helper",600,"PAPPPP",0],["S. Peddaiah","Mason",1000,"PPPPPH",0],["A. Nagamma","Helper",650,"PHPPPP",0],["C. Narasamma","Helper",600,"PPPPPP",0],["R. Chinnamma","Helper",700,"PPPAPP",0],["C. Bhaskar","Bar bender",850,"PPPPPP",0],["S. Jayamma","Helper",700,"PPPHPP",0],["M. Chinnamma","Helper",600,"PPPPPP",0],["S. Mallaiah","Operator",1000,"PPPHPP",0],["T. Pullaiah","Helper",700,"PPPPPP",0],["R. Anji","Helper",600,"PPHPPP",0],["K. Pullamma","Helper",700,"PHPPPP",0],["R. Ramanjaneyulu","Helper",600,"PPPPAP",0]]};
-var ADV=[{"n":"B. Pullaiah","site":"mythri","ro":"Mason","out":20000,"wk":2000},{"n":"K. Lakshmamma","site":"mythri","ro":"Helper","out":8000,"wk":500},{"n":"S. Hussain","site":"mythri","ro":"Bar bender","out":12000,"wk":1000},{"n":"G. Venkatesu","site":"meadows","ro":"Operator","out":15000,"wk":1500},{"n":"M. Kondaiah","site":"meadows","ro":"Mason","out":12000,"wk":1000},{"n":"T. Gangamma","site":"meadows","ro":"Helper","out":8000,"wk":500},{"n":"D. Narasimhulu","site":"ekam","ro":"Mason","out":15000,"wk":1500},{"n":"C. Ramudu","site":"ekam","ro":"Helper","out":10000,"wk":1000},{"n":"Y. Sreenu","site":"brundavan","ro":"Mason","out":10000,"wk":1000}];
-var SITES=[{id:'mythri',n:'Mythri'},{id:'meadows',n:'Green Meadows'},{id:'ekam',n:'Ekam Residences'},{id:'brundavan',n:'Sai Brundavan'}];
+var WD={"mythri":[["Y. Mariyamma","Helper",650,"PPPHAP",0],["B. Prasad","Helper",700,"PPPPAP",0],["B. Sunkamma","Helper",600,"PPPPHP",0],["R. Mallaiah","Mason",900,"PHPPAP",0],["A. Chinnamma","Helper",700,"PPHPPP",0],["M. Mariyamma","Helper",700,"PPPPHP",0],["G. Anji","Operator",950,"PPPPPP",0],["E. Kondaiah","Helper",650,"PPPPHP",0],["N. Lakshmaiah","Helper",700,"PPPHHP",0],["A. Siva","Bar bender",800,"HPPPPP",0],["Y. Jilani","Mason",1000,"PPPPPP",0],["S. Hussain","Bar bender",850,"PPPPPP",1000],["B. Narayana","Helper",700,"HPPPPP",0],["V. Kamakshi","Helper",600,"PPPPPP",0],["C. Yerriswamy","Helper",650,"HPPPPP",0],["Y. Balaiah","Helper",700,"PHPPPP",0],["K. Guruvaiah","Helper",650,"PPPPPP",0],["K. Saraswathi","Helper",700,"PPPPPH",0],["P. Peddaiah","Mason",900,"PPPPAP",0],["A. Eswaraiah","Bar bender",850,"PPPPPP",0],["V. Chinna Subbaiah","Helper",650,"PPPPPP",0],["J. Saraswathi","Helper",600,"PPPPPP",0],["Y. Sunkamma","Helper",650,"PPPPPP",0],["J. Suresh","Bar bender",850,"PPPPPP",0],["T. Rangadu","Helper",600,"PPAHPP",0],["P. Khasim","Operator",1000,"PPPPPP",0],["E. Sreenu","Helper",600,"PPPPPP",0],["P. Eswaraiah","Helper",600,"PPPPPP",0],["K. Lakshmamma","Helper",650,"PPPPPP",500],["Y. Obulesu","Mason",1000,"PAPPPP",0],["M. Venkatesu","Helper",600,"PPPPPP",0],["M. Balaiah","Mason",1000,"PPPPHP",0],["P. Mabu Basha","Mason",950,"PPPPPP",0],["B. Pullaiah","Mason",950,"PPAPPP",2000]],"panchamukhi":[["R. Dastagiri","Helper",650,"APPHPP",0],["N. Kamakshi","Helper",650,"PHPAPP",0],["T. Sunkamma","Helper",700,"PPPHPA",0],["D. Gangamma","Helper",650,"PPPHPH",0],["N. Suresh","Mason",1000,"PPPHPP",0],["M. Madhu","Bar bender",850,"APPHPP",0],["D. Eswaraiah","Helper",600,"PHPHPP",0],["G. Venkatamma","Helper",700,"PPPHHP",0],["E. Suresh","Bar bender",850,"PPPHHP",0],["M. Kondaiah","Mason",950,"PPPHPP",1000],["T. Ramudu","Helper",700,"PPPHPP",0],["K. Lakshmaiah","Mason",950,"HAPHPP",0],["G. Venkatesu","Operator",950,"PPPHPP",1500],["R. Maddilety","Helper",700,"APPHPP",0],["M. Narasamma","Helper",600,"PPPHAP",0],["V. Mabu Basha","Operator",950,"PHPHPP",0],["G. Pullamma","Helper",600,"PPPHHP",0],["T. Gangamma","Helper",700,"HPPHPP",500],["R. Subbarayudu","Bar bender",850,"PPPHPH",0],["Y. Eswaraiah","Helper",600,"PPPHPP",0],["S. Siva","Mason",1000,"PPPHAP",0],["N. Gangadhar","Helper",700,"PPPHPP",0],["D. Subbarayudu","Operator",950,"PHPHPP",0],["B. Obulesu","Mason",1000,"PHPHPP",0],["P. Bhaskar","Helper",700,"PPPHPP",0],["A. Venkatesu","Mason",1000,"PPPHPP",0],["T. Mariyamma","Helper",650,"PPPHPP",0],["A. Obulesu","Bar bender",850,"HPPHPP",0],["A. Jayamma","Helper",600,"PPPHPP",0],["N. Obulamma","Helper",600,"PPPHPP",0],["J. Nagendra","Mason",950,"PPPHPP",0],["P. Nagamma","Helper",700,"PHHHPP",0],["M. Maddilety","Helper",650,"PPPHPP",0],["B. Jayamma","Helper",650,"PPPHPP",0],["J. Chinna Subbaiah","Mason",900,"PHPHPP",0],["E. Anji","Helper",650,"PPPHPP",0],["S. Rangadu","Helper",650,"PHPHPP",0],["J. Venkatamma","Helper",700,"PPPAPP",0]],"ekam":[["A. Nagendra","Bar bender",800,"PPPHPP",0],["P. Prasad","Mason",950,"PPPPPP",0],["D. Narasamma","Helper",700,"PPPPPP",0],["D. Narasimhulu","Mason",950,"PPPPPP",1500],["K. Ramanjaneyulu","Mason",950,"PPPPPP",0],["M. Venkatamma","Helper",600,"HPPPPP",0],["M. Subbarayudu","Helper",700,"PPPPPP",0],["E. Narayana","Bar bender",850,"PPAPPH",0],["S. Narasamma","Helper",700,"APPPPP",0],["D. Nagamma","Helper",600,"PPPPPH",0],["D. Suresh","Operator",1000,"HPPPPP",0],["V. Hussain","Helper",650,"PPPPPP",0],["M. Rajeswari","Helper",600,"APPPPP",0],["M. Padma","Helper",700,"PHPPHP",0],["C. Dastagiri","Mason",950,"APPPPP",0],["K. Eswaraiah","Helper",700,"PHPPPP",0],["S. Yellamma","Helper",650,"PPPPPP",0],["C. Lakshmamma","Helper",650,"PPPPPP",0],["P. Eswaramma","Helper",700,"PPPPPP",0],["B. Jilani","Mason",900,"PPPPPH",0],["Y. Kondaiah","Helper",700,"PPPPPA",0],["J. Gangadhar","Bar bender",800,"APPHPP",0],["S. Lakshmamma","Helper",700,"PPPPPP",0],["J. Subbarayudu","Helper",600,"PPPHPP",0],["T. Subbamma","Helper",600,"PPPPPP",0],["J. Mallaiah","Helper",700,"PPPPPP",0],["Y. Ramanjaneyulu","Operator",950,"PPPPAP",0],["E. Lakshmaiah","Mason",900,"HPPPPP",0],["D. Narayana","Bar bender",800,"PPPPPH",0],["C. Ramudu","Helper",700,"PPHPPP",1000],["K. Suresh","Helper",650,"PPPPPP",0],["C. Sreenu","Helper",700,"PPPPPP",0]],"vivanta":[["P. Siva","Helper",650,"PPPPPA",0],["G. Kamakshi","Helper",700,"PPPPPP",0],["E. Obulamma","Helper",600,"PPPAHP",0],["S. Venkatesu","Bar bender",800,"PPPPHP",0],["A. Guruvaiah","Mason",950,"PPPPHP",0],["S. Eswaraiah","Helper",700,"HPPPPP",0],["N. Mallaiah","Helper",700,"HPPPPH",0],["Y. Sreenu","Mason",950,"PPPPHP",1000],["R. Lakshmaiah","Mason",900,"PHPPPP",0],["D. Maddilety","Mason",950,"PPPPPP",0],["C. Mallaiah","Helper",650,"HPPPPP",0],["J. Siva","Helper",600,"PAPPPP",0],["S. Peddaiah","Mason",1000,"PPPPPH",0],["A. Nagamma","Helper",650,"PHPPPP",0],["C. Narasamma","Helper",600,"PPPPPP",0],["R. Chinnamma","Helper",700,"PPPAPP",0],["C. Bhaskar","Bar bender",850,"PPPPPP",0],["S. Jayamma","Helper",700,"PPPHPP",0],["M. Chinnamma","Helper",600,"PPPPPP",0],["S. Mallaiah","Operator",1000,"PPPHPP",0],["T. Pullaiah","Helper",700,"PPPPPP",0],["R. Anji","Helper",600,"PPHPPP",0],["K. Pullamma","Helper",700,"PHPPPP",0],["R. Ramanjaneyulu","Helper",600,"PPPPAP",0]]};
+var ADV=[{"n":"B. Pullaiah","site":"mythri","ro":"Mason","out":20000,"wk":2000},{"n":"K. Lakshmamma","site":"mythri","ro":"Helper","out":8000,"wk":500},{"n":"S. Hussain","site":"mythri","ro":"Bar bender","out":12000,"wk":1000},{"n":"G. Venkatesu","site":"panchamukhi","ro":"Operator","out":15000,"wk":1500},{"n":"M. Kondaiah","site":"panchamukhi","ro":"Mason","out":12000,"wk":1000},{"n":"T. Gangamma","site":"panchamukhi","ro":"Helper","out":8000,"wk":500},{"n":"D. Narasimhulu","site":"ekam","ro":"Mason","out":15000,"wk":1500},{"n":"C. Ramudu","site":"ekam","ro":"Helper","out":10000,"wk":1000},{"n":"Y. Sreenu","site":"vivanta","ro":"Mason","out":10000,"wk":1000}];
+var SITES=[{id:'mythri',n:'Mythri Enclave'},{id:'panchamukhi',n:'Panchamukhi Paradise – 2'},{id:'ekam',n:'Ekam Residences'},{id:'vivanta',n:'Vivanta Enclave – 2'}];
 var W={};SITES.forEach(function(s){W[s.id]=WD[s.id].map(function(w){return {n:w[0],ro:w[1],rate:w[2],m:w[3].split(''),adv:w[4]}})});
 var DAYS=[['Mon','9'],['Tue','10'],['Wed','11'],['Thu','12'],['Fri','13'],['Sat','14']];
 function wDays(w){return w.m.reduce(function(a,v){return a+MKV[v]},0)}
@@ -572,30 +573,30 @@ function wPay(w){return Math.max(0,w.rate*wDays(w)-w.adv)}
 function siteTot(id){return W[id].reduce(function(a,w){return a+wPay(w)},0)}
 var WO=[
  {id:'w1',who:'K. Rangaiah',work:'Compound wall',v:'mythri',agreed:1200000,paid:720000,row:'p2',next:'Part bill 3, ₹'+NB+'1,80,000'},
- {id:'w2',who:'S. Peddanna',work:'Internal roads, gravel',v:'meadows',agreed:1850000,paid:925000,next:'Bill 5 expected about 25 Nov, roughly ₹'+NB+'2,30,000'},
+ {id:'w2',who:'S. Peddanna',work:'Internal roads, gravel',v:'panchamukhi',agreed:1850000,paid:925000,next:'Bill 5 expected about 25 Nov, roughly ₹'+NB+'2,30,000'},
  {id:'w3',who:'M. Yellaiah',work:'Drainage',v:'ekam',agreed:640000,paid:160000,next:'Bill 2 when drains reach 50%, roughly ₹'+NB+'1,60,000'}
 ];
 function woPaid(w){var r=w.row&&R(w.row);return w.paid+(r&&r.st==='paid'?r.amt:0)}
 var STAFF=[
- ['K. Srinivasulu','Projects manager',58000],['P. Ravindra Reddy','Site engineer, Mythri',45000],['K. Harsha Vardhan','Site engineer, Green Meadows',42000],
+ ['K. Srinivasulu','Projects manager',58000],['P. Ravindra Reddy','Site engineer, Mythri Enclave',45000],['K. Harsha Vardhan','Site engineer, Panchamukhi Paradise – 2',42000],
  ['T. Vamsi Krishna','Surveyor',35000],['Sravani','Accounts',32000],['S. Nagaraju','Site supervisor, Ekam Residences',30000],
- ['B. Chinna Reddy','Site supervisor, Sai Brundavan',28000],['M. Lavanya','Sales',25000],['G. Prakash','Sales',25000],
+ ['B. Chinna Reddy','Site supervisor, Vivanta Enclave – 2',28000],['M. Lavanya','Sales',25000],['G. Prakash','Sales',25000],
  ['Imran','Office assistant',22000],['V. Siva','Store keeper',20000],['D. Mahesh','Driver, Bolero',18000],
- ['A. Rajeswari','Reception',16000],['N. Hussain','Watchman, Green Meadows',14000]
+ ['A. Rajeswari','Reception',16000],['N. Hussain','Watchman, Panchamukhi Paradise – 2',14000]
 ];
 
 /* vehicles */
 var VEH=[
- {no:'AP 04 TX 6617',ty:'JCB 3DX',dr:'S. Ramesh',at:'Workshop, Kadapa',v:'meadows',L:520,rs:50880,run:80,u:'h',meter:6412},
- {no:'AP 39 TZ 2284',ty:'JCB 3DX',dr:'C. Obulesu',at:'Mythri',v:'mythri',L:1078,rs:105480,run:110,u:'h',meter:5180},
+ {no:'AP 04 TX 6617',ty:'JCB 3DX',dr:'S. Ramesh',at:'Workshop, Kadapa',v:'panchamukhi',L:520,rs:50880,run:80,u:'h',meter:6412},
+ {no:'AP 39 TZ 2284',ty:'JCB 3DX',dr:'C. Obulesu',at:'Mythri Enclave',v:'mythri',L:1078,rs:105480,run:110,u:'h',meter:5180},
  {no:'AP 04 TY 3391',ty:'JCB 3DX',dr:'Khaja Hussain',at:'Ekam Residences',v:'ekam',L:754,rs:73780,run:116,u:'h',meter:7934},
- {no:'AP 39 UA 1045',ty:'JCB 3DX',dr:'B. Venkatesu',at:'Sai Brundavan',v:'brundavan',L:650,rs:63600,run:100,u:'h',meter:3876},
- {no:'AP 39 TV 4471',ty:'Tipper',dr:'G. Pullanna',at:'Mythri',v:'mythri',L:380,rs:37180,run:1520,u:'km',meter:84210},
- {no:'AP 04 TW 8812',ty:'Tipper',dr:'T. Sreenu',at:'Green Meadows',v:'meadows',L:420,rs:41100,run:1640,u:'km',meter:112530},
+ {no:'AP 39 UA 1045',ty:'JCB 3DX',dr:'B. Venkatesu',at:'Vivanta Enclave – 2',v:'vivanta',L:650,rs:63600,run:100,u:'h',meter:3876},
+ {no:'AP 39 TV 4471',ty:'Tipper',dr:'G. Pullanna',at:'Mythri Enclave',v:'mythri',L:380,rs:37180,run:1520,u:'km',meter:84210},
+ {no:'AP 04 TW 8812',ty:'Tipper',dr:'T. Sreenu',at:'Panchamukhi Paradise – 2',v:'panchamukhi',L:420,rs:41100,run:1640,u:'km',meter:112530},
  {no:'AP 39 TX 5530',ty:'Tipper',dr:'V. Nagendra',at:'Ekam Residences',v:'ekam',L:352,rs:34440,run:1410,u:'km',meter:67845},
- {no:'AP 04 TU 7764',ty:'Tipper',dr:'Mabu Basha',at:'Green Meadows',v:'meadows',L:288,rs:28180,run:1180,u:'km',meter:95120},
- {no:'AP 04 AB 2290',ty:'Tractor',dr:'P. Subbarayudu',at:'Sai Brundavan',v:'brundavan',L:96,rs:9390,run:32,u:'h',meter:2214},
- {no:'AP 39 AC 6618',ty:'Tractor',dr:'Gangulu',at:'Mythri',v:'mythri',L:105,rs:10270,run:35,u:'h',meter:1987},
+ {no:'AP 04 TU 7764',ty:'Tipper',dr:'Mabu Basha',at:'Panchamukhi Paradise – 2',v:'panchamukhi',L:288,rs:28180,run:1180,u:'km',meter:95120},
+ {no:'AP 04 AB 2290',ty:'Tractor',dr:'P. Subbarayudu',at:'Vivanta Enclave – 2',v:'vivanta',L:96,rs:9390,run:32,u:'h',meter:2214},
+ {no:'AP 39 AC 6618',ty:'Tractor',dr:'Gangulu',at:'Mythri Enclave',v:'mythri',L:105,rs:10270,run:35,u:'h',meter:1987},
  {no:'AP 39 BQ 4120',ty:'Bolero',dr:'D. Mahesh',at:'Office and site rounds',v:'office',L:58,rs:5700,run:812,u:'km',meter:46390}
 ];
 function VH(no){return VEH.filter(function(x){return x.no===no})[0]}
@@ -614,7 +615,7 @@ var REP=[
 ];
 
 var state={view:'finance',role:'owner',venture:'all',pcat:'all',pven:'all',tab:'daily',site:'mythri',showAll:false,
-  cycle:{mythri:'weekly',meadows:'weekly',ekam:'weekly',brundavan:'weekly'},fuelVeh:null,wage:null,fuelAdd:[],seq:17};
+  cycle:{mythri:'weekly',panchamukhi:'weekly',ekam:'weekly',vivanta:'weekly'},fuelVeh:null,wage:null,fuelAdd:[],seq:17};
 
 /* ---------- money sums ---------- */
 function vlist(v){return v==='all'?VEN.map(function(x){return x.id}):[v]}
@@ -788,12 +789,12 @@ function renderLabour(){
        '<span class="staff-only">This week\'s wage sheet: '+allN+' workers at 4 sites, to be paid Saturday 21 Nov.</span></p>'+
        (sent?(sent.st==='wait'?'<span class="chip warn">'+I.clock+'Sent for approval</span>':sent.st==='held'?'<span class="chip neutral">'+I.pause+'Held by owner</span>':'<span class="chip ok">'+I.check+'Approved for 21 Nov</span>'):'<button class="btn primary" data-sendwage>Send wage sheet for approval</button>')+'</div>'+
        '<p class="note">The pay cycle is not fixed yet, so each site has its own setting below.</p></section>'+
-    '<div class="sites"><div class="seg" role="group" aria-label="Site">'+SITES.map(function(x){return '<button data-site="'+x.id+'" aria-pressed="'+(x.id===s)+'">'+x.n+'<span>'+W[x.id].length+'</span></button>'}).join('')+'</div>'+
+    '<div class="sites"><div class="seg" role="group" aria-label="Site">'+SITES.map(function(x){return '<button data-site="'+x.id+'" aria-pressed="'+(x.id===s)+'">'+esc(x.n).replace(/ – (\S+)$/,' <span class="nw">– $1</span>')+'<span>'+W[x.id].length+'</span></button>'}).join('')+'</div>'+
      sel('cycle',state.cycle[s],[['daily','Paid: Daily'],['weekly','Paid: Weekly'],['monthly','Paid: Monthly']],'How '+sn+' is paid')+'</div>'+
     '<section class="card"><div class="card-head"><h2>'+esc(sn)+' site</h2><span class="meta">'+ws.length+' workers</span></div>'+
      '<div class="period"><span>Period: <b>'+cy.per+'</b></span><span>'+cy.paid+'</span>'+(state.cycle[s]!=='weekly'?'<span class="mute">Attendance below is the week of 9 to 14 Nov</span>':'')+'</div>'+
-     '<div class="marks" aria-hidden="true"><span>'+MK.P+'Present</span><span>'+MK.H+'Half day</span><span>'+MK.A+'Absent</span><span class="mute">Tap a mark to change it</span></div><p class="note swipe" style="margin:0 0 8px">Swipe the table sideways for all six days and the totals.</p>'+(s==='meadows'?'<p class="note" style="margin:0 0 8px">Thursday 12 Nov was a half day at Green Meadows for rain.</p>':'')+
-     '<div class="att-wrap"><table class="att"><thead><tr><th>Worker</th><th class="num">Daily rate</th>'+DAYS.map(function(d,i){var rain=i===3&&s==='meadows';return '<th class="d'+(rain?' rain':'')+'">'+d[0]+' '+d[1]+(rain?'<small>Rain</small>':'')+'</th>'}).join('')+'<th class="num">Days</th><th class="num">Advance</th><th class="num">To pay</th></tr></thead><tbody>'+
+     '<div class="marks" aria-hidden="true"><span>'+MK.P+'Present</span><span>'+MK.H+'Half day</span><span>'+MK.A+'Absent</span><span class="mute">Tap a mark to change it</span></div><p class="note swipe" style="margin:0 0 8px">Swipe the table sideways for all six days and the totals.</p>'+(s==='panchamukhi'?'<p class="note" style="margin:0 0 8px">Thursday 12 Nov was a half day at Panchamukhi Paradise – 2 for rain.</p>':'')+
+     '<div class="att-wrap"><table class="att"><thead><tr><th>Worker</th><th class="num">Daily rate</th>'+DAYS.map(function(d,i){var rain=i===3&&s==='panchamukhi';return '<th class="d'+(rain?' rain':'')+'">'+d[0]+' '+d[1]+(rain?'<small>Rain</small>':'')+'</th>'}).join('')+'<th class="num">Days</th><th class="num">Advance</th><th class="num">To pay</th></tr></thead><tbody>'+
      shown.map(function(w,wi){return '<tr><td><span class="nm">'+esc(w.n)+'</span><span class="ro">'+w.ro+'</span></td><td class="num" style="font-weight:400">'+inr(w.rate)+'</td>'+
        w.m.map(function(m,di){return '<td class="d"><button class="mk '+m+'" data-mk="'+wi+':'+di+'" aria-label="'+esc(w.n)+', '+DAYS[di][0]+' '+DAYS[di][1]+' Nov: '+MKN[m]+'. Tap to change.">'+MK[m]+'</button></td>'}).join('')+
        '<td class="num" style="font-weight:400">'+wDays(w)+'</td><td class="num" style="font-weight:400">'+(w.adv?'− '+inr(w.adv):'<span class="mute">None</span>')+'</td><td class="num">'+inr(wPay(w))+'</td></tr>'}).join('')+

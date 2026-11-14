@@ -495,29 +495,32 @@ var SLABEL={available:'Available',booked:'Booked',paying:'Paying',overdue:'Overd
 
 /* ---------- data ---------- */
 var V=[
- {id:'pranava',name:'Pranava Enclave',plots:96,first:101,avail:14,rate:11000,col:2140000,pay:15,due:550000,dueN:4,over:630000,overN:5,old:41,sold:2},
- {id:'ekam',name:'Ekam Residences',plots:120,first:1,avail:31,rate:12500,col:1780000,pay:13,due:425000,dueN:4,over:840000,overN:6,old:94,sold:1},
- {id:'mythri',name:'Mythri',plots:121,first:1,avail:28,rate:9500,col:1420000,pay:11,due:375000,dueN:3,over:710000,overN:5,old:67,sold:2},
- {id:'nilayam',name:'Sri Nilayam',plots:84,first:1,avail:9,rate:8000,col:960000,pay:7,due:200000,dueN:2,over:320000,overN:2,old:22,sold:1},
- {id:'meadows',name:'Green Meadows',plots:110,first:101,avail:38,rate:10000,col:1290000,pay:9,due:350000,dueN:3,over:760000,overN:6,old:58,sold:2},
- {id:'brundavan',name:'Sai Brundavan',plots:79,first:1,avail:23,rate:7500,col:860000,pay:7,due:275000,dueN:2,over:460000,overN:3,old:35,sold:1}
+ {id:'pranava',name:'Pranava Enclave',plots:78,avail:41,rate:10500,col:1100000,pay:8,due:300000,dueN:2,over:430000,overN:3,old:41,sold:1},
+ {id:'mythri',name:'Mythri Enclave',plots:121,extra:{6:'6A',119:'119A'},avail:22,rate:11000,col:1750000,pay:13,due:450000,dueN:4,over:840000,overN:6,old:67,sold:2},
+ {id:'panchamukhi',name:'Panchamukhi Paradise – 2',plots:191,avail:38,rate:10000,col:2600000,pay:19,due:650000,dueN:5,over:1060000,overN:8,old:58,sold:3},
+ {id:'vivanta',name:'Vivanta Enclave – 2',plots:117,avail:19,rate:7500,col:1250000,pay:9,due:325000,dueN:3,over:560000,overN:4,old:35,sold:1},
+ {id:'vajra',name:'Vajra Living',plots:27,avail:9,rate:9000,col:400000,pay:3,due:100000,dueN:1,over:170000,overN:1,old:22,sold:1},
+ {id:'ekam',name:'Ekam Residences',plots:74,avail:14,rate:12500,col:1350000,pay:10,due:350000,dueN:3,over:660000,overN:5,old:94,sold:1}
 ];
+/* real plot numbering: 1 to n, plus lettered sub-plots (Mythri Enclave has 6A and 119A) */
+V.forEach(function(v){var x=v.extra||{},n=v.plots-Object.keys(x).length,i;v.nos=[];for(i=1;i<=n;i++){v.nos.push(i);if(x[i])v.nos.push(x[i])}});
+function pno(x){return /^\d+$/.test(x)?+x:x}
 var VBY={};V.forEach(function(v){VBY[v.id]=v});
 var SERIES=[['Jun',61.2],['Jul',72.8],['Aug',58.4],['Sep',79.1],['Oct',91.6],['Nov',84.5]];
 /* customers that appear on the owners' screen keep the same names on their plots */
 var FIX={
- 'pranava:114':{st:'overdue'},
- 'pranava:162':{st:'overdue',name:'S. Mahaboob Basha',amt:200000,days:41},
+ 'mythri:114':{st:'overdue'},
+ 'pranava:62':{st:'overdue',name:'S. Mahaboob Basha',amt:200000,days:41},
  'ekam:37':{st:'overdue',name:'B. Narasimha Reddy',amt:300000,days:94},
- 'ekam:104':{st:'overdue',name:'Y. Siva Prasad',amt:220000,days:49},
+ 'ekam:64':{st:'overdue',name:'Y. Siva Prasad',amt:220000,days:49},
  'ekam:72':{st:'booked',name:'N. Chandra Sekhar'},
  'ekam:58':{st:'paying',name:'T. Padmavathi',cheque:250000},
  'mythri:88':{st:'overdue',name:'M. Sujatha',amt:250000,days:67},
  'mythri:93':{st:'paying',name:'C. Raghunatha Reddy',cheque:200000},
- 'nilayam:71':{st:'overdue',name:'D. Anuradha',amt:170000,days:22},
- 'meadows:119':{st:'overdue',name:'G. Obul Reddy',amt:240000,days:58},
- 'meadows:208':{st:'booked',name:'A. Hari Krishna',size:167},
- 'brundavan:45':{st:'overdue',name:'P. Venkata Subbaiah',amt:180000,days:35}
+ 'vajra:21':{st:'overdue',name:'D. Anuradha',amt:170000,days:22},
+ 'panchamukhi:119':{st:'overdue',name:'G. Obul Reddy',amt:240000,days:58},
+ 'panchamukhi:148':{st:'booked',name:'A. Hari Krishna',size:167},
+ 'vivanta:45':{st:'overdue',name:'P. Venkata Subbaiah',amt:180000,days:35}
 };
 var NAMES=['V. Sreenivasulu','K. Madhavi','R. Venkata Ramana','S. Khader Basha','P. Lakshmi Devi','G. Ramanjaneyulu','M. Nagaraju','B. Sunitha','T. Ravi Kumar','C. Subba Reddy','D. Aruna Kumari','N. Mallikarjuna','Y. Ramadevi','A. Suresh Babu','J. Vijaya Lakshmi','K. Gangadhar','S. Fathima','P. Chenna Kesava Reddy','M. Bharathi','V. Prasad Rao','G. Swarnalatha','B. Ramakrishna','T. Shobha Rani','R. Jayaramudu','N. Kalpana','D. Venkateswarlu','K. Rajeswari','S. Imtiaz Ahmed','P. Sai Kumar','M. Eswaramma','C. Narayana Swamy','Y. Padmaja','A. Bala Krishna','G. Hemalatha','V. Kondaiah','B. Uma Maheswari','T. Rama Mohan','R. Sarada','K. Peddanna','N. Sridevi'];
 var AGENTS=['S. Venkat','P. Ramanaiah','K. Jilani Basha',null,'M. Sudhakar',null];
@@ -526,8 +529,8 @@ var SIZES=[150,167,183,200,233,267],FACE=['East','West','North','South'];
 var PLOTS={}; /* ventureId -> array of plots */
 V.forEach(function(v,vi){
   var r=rng(1000+vi*77),list=[],i;
-  for(i=0;i<v.plots;i++){
-    var no=v.first+i,f=FIX[v.id+':'+no]||{};
+  for(i=0;i<v.nos.length;i++){
+    var no=v.nos[i],f=FIX[v.id+':'+no]||{};
     list.push({v:v.id,no:no,st:f.st||null,name:f.name||null,fix:f,size:f.size||SIZES[Math.floor(r()*SIZES.length)],face:FACE[Math.floor(r()*4)],seed:Math.floor(r()*1e6)});
   }
   var counts={available:v.avail,overdue:v.overN,registered:Math.round(v.plots*.27),booked:Math.round(v.plots*.08)};
@@ -544,7 +547,7 @@ V.forEach(function(v,vi){
   PLOTS[v.id]=list;
 });
 function findPlot(vid,no){return PLOTS[vid].filter(function(p){return p.no===no})[0]}
-(function(){var p=findPlot('pranava',114);p.name='K. Ramesh & K. Lakshmi';p.joint=true;p.size=167;p.face='East';p.phone='98xxx xx114';p.agent='S. Venkat'})();
+(function(){var p=findPlot('mythri',114);p.name='K. Ramesh & K. Lakshmi';p.joint=true;p.size=167;p.face='East';p.phone='98xxx xx114';p.agent='S. Venkat'})();
 
 var receiptNo=619;
 function rc(n){return 'R-'+('0000'+n).slice(-4)}
@@ -552,7 +555,7 @@ function rc(n){return 'R-'+('0000'+n).slice(-4)}
 function sale(p){
   if(p.sale||p.st==='available')return p.sale;
   var v=VBY[p.v],rows=[],price=p.size*v.rate,s;
-  if(p.v==='pranava'&&p.no===114){
+  if(p.v==='mythri'&&p.no===114){
     rows=[
      {date:d(2026,6,12),label:'Booking',amt:100000,mode:'Cash',rcpt:'R-0412',st:'received'},
      {date:d(2026,7,5),label:'Instalment 1',amt:300000,mode:'Bank transfer',rcpt:'R-0467',st:'received'},
@@ -584,14 +587,14 @@ function sale(p){
 function paidOf(s){return s.rows.reduce(function(a,r){return a+(r.st==='received'?r.amt:0)},0)}
 
 var state={
-  view:'owners',venture:'all',chqOpen:false,chartVenture:'pranava',cur:{v:'pranava',no:114},focus:null,
+  view:'owners',venture:'all',chqOpen:false,chartVenture:'pranava',cur:{v:'mythri',no:114},focus:null,
   approvals:[
-   {id:'a1',v:'pranava',plot:114,what:'Agent commission',why:'S. Venkat, Plot 114, Pranava Enclave',by:'Raised by Sravani, 14 Nov',amt:45000,st:'pending'},
+   {id:'a1',v:'mythri',plot:114,what:'Agent commission',why:'S. Venkat, Plot 114, Mythri Enclave',by:'Raised by Sravani, 14 Nov',amt:45000,st:'pending'},
    {id:'a2',v:'ekam',plot:72,what:'Refund, booking cancelled',why:'N. Chandra Sekhar, Plot 72, Ekam Residences',by:'Raised by Imran, 13 Nov',amt:100000,st:'pending'},
-   {id:'a3',v:'meadows',plot:208,what:'Discount on Plot 208',why:'₹'+NB+'50 / sq yd off, Green Meadows',by:'Raised by Sravani, 14 Nov',amt:8350,st:'pending'}
+   {id:'a3',v:'panchamukhi',plot:148,what:'Discount on Plot 148',why:'₹'+NB+'50 / sq yd off, Panchamukhi Paradise – 2',by:'Raised by Sravani, 14 Nov',amt:8350,st:'pending'}
   ],
   cheques:[
-   {v:'pranava',plot:114,name:'K. Ramesh',amt:150000,date:d(2026,11,12)},
+   {v:'mythri',plot:114,name:'K. Ramesh',amt:150000,date:d(2026,11,12)},
    {v:'ekam',plot:58,name:'T. Padmavathi',amt:250000,date:d(2026,11,11)},
    {v:'mythri',plot:93,name:'C. Raghunatha Reddy',amt:200000,date:d(2026,11,13)}
   ],
@@ -626,7 +629,7 @@ function totals(){
 function ventureSelect(id,val,withAll){
   return '<div class="select"><label class="sr" for="'+id+'">Venture</label><select id="'+id+'">'+(withAll?'<option value="all">All ventures</option>':'')+V.map(function(v){return '<option value="'+v.id+'"'+(val===v.id?' selected':'')+'>'+esc(v.name)+'</option>'}).join('')+'</select>'+I.caret+'</div>';
 }
-var OVERDUE=[['ekam',37],['mythri',88],['meadows',119],['ekam',104],['pranava',162],['brundavan',45],['nilayam',71],['pranava',114]];
+var OVERDUE=[['ekam',37],['mythri',88],['panchamukhi',119],['ekam',64],['pranava',62],['vivanta',45],['vajra',21],['mythri',114]];
 function renderOwners(){
   var t=totals(),all=state.venture==='all',share=t.base/8450000;
   var ser=SERIES.map(function(s,i){var val=Math.round(s[1]*share*10)/10;if(i===5)val=Math.round(t.col/10000)/10;return [s[0],val]});
@@ -789,7 +792,7 @@ panel.addEventListener('input',function(e){
 });
 panel.addEventListener('click',function(e){
   var b=e.target.closest('button');if(!b)return;
-  if(b.dataset.pick){var k=b.dataset.pick.split(':');form.plot=findPlot(k[0],+k[1]);drawForm();document.getElementById('fAmt').focus()}
+  if(b.dataset.pick){var k=b.dataset.pick.split(':');form.plot=findPlot(k[0],pno(k[1]));drawForm();document.getElementById('fAmt').focus()}
   else if(b.id==='fChange'){form.plot=null;drawForm();document.getElementById('fPlot').focus()}
   else if(b.id==='fFill'){var s=sale(form.plot),n=s.rows.filter(function(r){return r.st==='overdue'||r.st==='upcoming'})[0];form.amt=n.amt;drawForm()}
   else if(b.dataset.mode){form.mode=b.dataset.mode;panel.querySelectorAll('[data-mode]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
@@ -848,7 +851,7 @@ document.addEventListener('click',function(e){
   else if('close' in ds)dismiss();
   else if('pay' in ds)openPay(ds.pay==='here');
   else if(ds.go){if(ds.go==='plots'&&state.view==='owners'&&state.venture!=='all')state.chartVenture=state.venture;go(ds.go)}
-  else if(ds.open){var k=ds.open.split(':');q.value='';results.classList.remove('on');go('customer',{cur:{v:k[0],no:+k[1]},chartVenture:k[0]})}
+  else if(ds.open){var k=ds.open.split(':');q.value='';results.classList.remove('on');go('customer',{cur:{v:k[0],no:pno(k[1])},chartVenture:k[0]})}
   else if(ds.approve||ds.hold||ds.undo){
     a=state.approvals.filter(function(x){return x.id===(ds.approve||ds.hold||ds.undo)})[0];
     a.st=ds.approve?'approved':ds.hold?'held':'pending';render();
