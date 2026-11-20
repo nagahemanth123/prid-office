@@ -3,11 +3,11 @@
    Desktop: a card in the bottom-right corner. Phone: a highlighted bottom sheet over a dimmed page.
    Shows once per browser until closed or opened; bump KEY for the next batch. */
 (function () {
-  var KEY = 'prid-notice-posters-ny2027';
+  var KEY = 'prid-notice-new-posters-1';
   try { if (localStorage.getItem(KEY)) return; } catch (e) {}
   var me = document.currentScript;
   var base = (me && me.getAttribute('data-base')) || '';
-  if (/\/posters\/(index\.html)?$/.test(location.pathname)) return;
+  if (/\/posters\//.test(location.pathname)) return;
 
   var css = '' +
     '.prid-sc{position:fixed;inset:0;z-index:9998;background:rgba(23,23,26,.5);opacity:0;transition:opacity .25s ease;display:none}' +
@@ -54,11 +54,11 @@
     var box = document.createElement('aside');
     box.className = 'prid-nt'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'New posters');
     box.innerHTML =
-      '<div class="pics"><img src="' + base + 'posters/thumbs/A-magazine.jpg" alt=""><img src="' + base + 'posters/thumbs/B-magazine.jpg" alt=""></div>' +
+      '<div class="pics"><img src="' + base + 'posters/new-posters/thumbs/PR-1.jpg" alt=""><img src="' + base + 'posters/new-posters/thumbs/FM-2.jpg" alt=""></div>' +
       '<div class="tx"><span class="t"><i></i>New</span>' +
-      '<b>New Year 2027 posters are ready</b>' +
-      '<p>2 designs for newspaper and magazine, waiting to download.</p>' +
-      '<a class="prid-go" href="' + base + 'posters/index.html">View and download' +
+      '<b>New posters are ready</b>' +
+      '<p>4 new Instagram posters, waiting to download.</p>' +
+      '<a class="prid-go" href="' + base + 'posters/new-posters/index.html">View and download' +
       '<svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg></a></div>' +
       '<button type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>';
     document.body.appendChild(sc); document.body.appendChild(box);
