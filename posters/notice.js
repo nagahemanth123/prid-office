@@ -3,7 +3,7 @@
    Desktop: a card in the bottom-right corner. Phone: a highlighted bottom sheet over a dimmed page.
    Shows once per browser until closed or opened; bump KEY for the next batch. */
 (function () {
-  var KEY = 'prid-notice-new-posters-2';
+  var KEY = 'prid-notice-new-posters-3';
   try { if (localStorage.getItem(KEY)) return; } catch (e) {}
   var me = document.currentScript;
   var base = (me && me.getAttribute('data-base')) || '';
@@ -54,10 +54,10 @@
     var box = document.createElement('aside');
     box.className = 'prid-nt'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'New posters');
     box.innerHTML =
-      '<div class="pics"><img src="' + base + 'posters/karthika-somavaram/thumbs/K1.jpg" alt=""><img src="' + base + 'posters/pranava-enclave/thumbs/PV-1.jpg" alt=""></div>' +
+      '<div class="pics"><img src="' + base + 'posters/karthika-pournami/thumbs/P1.jpg" alt=""><img src="' + base + 'posters/pranava-enclave/thumbs/PV-1.jpg" alt=""></div>' +
       '<div class="tx"><span class="t"><i></i>New</span>' +
-      '<b>9 new posters are ready</b>' +
-      '<p>Karthika Somavaram greetings and 6 Pranava Enclave posts, ready to download.</p>' +
+      '<b>Karthika Pournami greetings are ready</b>' +
+      '<p>3 Karthika Pournami greetings in HD, plus 6 Pranava Enclave posts, ready to download.</p>' +
       '<a class="prid-go" href="' + base + 'posters/index.html">View and download' +
       '<svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg></a></div>' +
       '<button type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>';
